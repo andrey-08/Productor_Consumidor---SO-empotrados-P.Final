@@ -1,0 +1,52 @@
+.PHONY: clean all
+
+APP_AUX=libutil
+LIB_AUX=util
+OBJ_AUX=$(LIB_AUX).o
+SRC_AUX=$(LIB_AUX).c
+AUX=$(APP_AUX).a
+INCLUDE_AUX=../include/util.h
+
+APP_MEM=libmemoria
+LIB_MEM=memoria
+OBJ_MEM=$(LIB_MEM).o
+SRC_MEM=$(LIB_MEM).c
+MEM=$(APP_MEM).a
+INCLUDE_MEM=../include/memoria.h
+MEM_FLAGS=-I../include
+
+APP_SEMAPHORE=libsemaforo
+LIB_SEMAPHORE=semaforo
+OBJ_SEMAPHORE=$(LIB_SEMAPHORE).o
+SRC_SEMAPHORE=$(LIB_SEMAPHORE).c
+SEMAPHORE=$(APP_SEMAPHORE).a
+INCLUDE_SEMAPHORE=../include/semaforo.h
+
+
+CC=gcc
+MAKELIB=ar rv
+RANLIB=ranlib
+
+all: $(AUX) $(MEM) $(SEMAPHORE) clean
+
+$(AUX): $(OBJ_AUX)
+		$(MAKELIB) $(AUX) $(OBJ_AUX) && $(RANLIB) $(AUX)
+
+$(OBJ_AUX): $(SRC_AUX) $(INCLUDE_AUX)
+		$(CC) -c $(SRC_AUX) 
+
+
+$(MEM): $(OBJ_MEM)
+		$(MAKELIB) $(MEM) $(OBJ_MEM) && $(RANLIB) $(MEM)
+
+$(OBJ_MEM): $(SRC_MEM) $(INCLUDE_MEM)
+		$(CC) -c $(SRC_MEM) $(MEM_FLAGS)
+
+$(SEMAPHORE): $(OBJ_SEMAPHORE)
+		$(MAKELIB) $(SEMAPHORE) $(OBJ_SEMAPHORE) && $(RANLIB) $(SEMAPHORE)
+
+$(OBJ_SEMAPHORE): $(SRC_SEMAPHORE) $(INCLUDE_SEMAPHORE)
+		$(CC) -c $(SRC_SEMAPHORE)
+
+clean:
+		rm  *.o
