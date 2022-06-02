@@ -7,3 +7,10 @@ El proyecto consiste en llevar a cabo la situación de Productor-Consumidor que 
 2) Productor: Proceso que me crea un dato que será almacenado en el buffer.
 3) Consumidor: Proceso que extrae el dato del buffer para ser leido y luego eliminado.
 4) Finalizador: Proceso que elimina todos los procesos Productores y consumidores que existan.
+# Ejecución
+1) make en la carpeta raiz
+2) ingresar a carpeta bin (cd bin)
+3) ./creador <nombreBuffer> <tamaño>
+4) ./productor <nombreBuffer> <media tiempo>
+5) ./consumidor <nombreBuffer> <media Tiempo>
+6) ./finalizador <nombreBuffer>
